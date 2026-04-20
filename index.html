@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Experiments — Code Showcase</title>
+  <meta name="description" content="Python implementations of classic AI algorithms — BFS, DFS, Hill Climbing, A*, Minimax." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== Top Bar (Title + Nav + Toggle) ===== -->
+  <header>
+    <h1>⚡ AI Experiments</h1>
+    <nav>
+      <a href="#exp3" class="nav-link active" data-target="exp3">EXP 3</a>
+      <a href="#exp4" class="nav-link" data-target="exp4">EXP 4</a>
+      <a href="#exp5" class="nav-link" data-target="exp5">EXP 5</a>
+      <a href="#exp6" class="nav-link" data-target="exp6">EXP 6</a>
+      <a href="#exp7" class="nav-link" data-target="exp7">EXP 7</a>
+    </nav>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+      <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main>
+
+    <section class="code-section" id="exp3">
+      <h2>EXP 3 — Breadth-First Search</h2>
+      <div class="code-card">
+        <div class="code-toolbar">
+          <span class="filename">EXP3.py</span>
+          <button class="copy-btn" data-code="exp3-code">
+            <svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre class="code-block"><code id="exp3-code">import collections
+
+graph1 = {
+    0 : [1,2,3],
+    1 : [2],
+    2 : [4],
+    3 : [],
+    4 : [],
+}
+graph = {
+    5 : [3,7],
+    3 : [2,4],
+    7 : [8],
+    2 : [],
+    4 : [8],
+    8 : []
+}
+
+def bfs(graph, node):
+    visited = []
+    queue = collections.deque([node])
+
+    while queue :
+        vertex = queue.popleft()
+        visited.append(vertex)
+
+        for neighbour in graph [vertex]:
+            if neighbour not in visited:
+                queue.append(neighbour)
+        
+        print (visited)
+
+print("Follwing is the breadth-first search")
+bfs(graph,5)</code></pre>
+      </div>
+    </section>
+
+    <section class="code-section" id="exp4">
+      <h2>EXP 4 — Depth-First Search</h2>
+      <div class="code-card">
+        <div class="code-toolbar">
+          <span class="filename">EXP4.py</span>
+          <button class="copy-btn" data-code="exp4-code">
+            <svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre class="code-block"><code id="exp4-code">import collections 
+
+graph = {
+    5 : [3,7],
+    3 : [2, 4],
+    7 : [8],
+    2 : [],
+    4 : [8],
+    8 : []
+}
+
+start = 5
+dest = 2
+visited = []
+stack = []
+path = []
+
+stack.append(start)
+
+while stack:
+    vertex = stack.pop()
+    visited.append(vertex)
+    if vertex == dest:
+        print("Goal FOUND:", vertex)
+        print(visited)
+        break
+    for neighbour in graph[vertex]:
+        if neighbour not in visited:
+            stack.append(neighbour)
+
+            # if neighbour == dest :
+            #     print("FOUND:", neighbour)
+            #     print(visited)
+            #     break
+            # print(path)</code></pre>
+      </div>
+    </section>
+
+    <section class="code-section" id="exp5">
+      <h2>EXP 5 — Hill Climbing</h2>
+      <div class="code-card">
+        <div class="code-toolbar">
+          <span class="filename">EXP5.py</span>
+          <button class="copy-btn" data-code="exp5-code">
+            <svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre class="code-block"><code id="exp5-code">import numpy as np
+def find_neighbours(state, landscape):
+    neighbours = []
+    dim = landscape.shape
+    x, y = state
+    
+    if x != 0:
+        neighbours.append((x - 1, y))
+    if x != dim[0] - 1:
+        neighbours.append((x + 1, y))
+    if y != 0:
+        neighbours.append((x, y - 1))
+    if y != dim[1] - 1:
+        neighbours.append((x, y + 1))
+    if x != 0 and y != 0:
+        neighbours.append((x - 1, y - 1))
+    if x != 0 and y != dim[1] - 1:
+        neighbours.append((x - 1, y + 1))
+    if x != dim[0] - 1 and y != 0:
+        neighbours.append((x + 1, y - 1))
+    if x != dim[0] - 1 and y != dim[1] - 1:
+        neighbours.append((x + 1, y + 1))
+    return neighbours
+
+def hill_climb(curr_state, landscape):
+    neighbours = find_neighbours(curr_state, landscape)
+    ascended = False
+    next_state = curr_state
+    for neighbour in neighbours:
+        if landscape[neighbour[0]][neighbour[1]] > landscape[next_state[0]][next_state[1]]:
+            next_state = neighbour
+            ascended = True
+    return ascended, next_state
+
+def main():
+    landscape = np.random.randint(1, 50, size=(10, 10))
+    print(landscape)
+    start_state = (8, 8)
+    current_state = start_state
+    count = 1
+    ascending = True
+    while ascending:
+        print("\nStep #", count)
+        print("Current state coordinates:", current_state)
+        print("Current state value:", landscape[current_state[0]][current_state[1]])
+        count += 1
+        ascending, current_state = hill_climb(current_state, landscape)
+    print("\nStep #", count)
+    print("Optimization objective reached.")
+    print("Final state coordinates:", current_state)
+    print("Final state value:", landscape[current_state[0]][current_state[1]])
+
+main()</code></pre>
+      </div>
+    </section>
+
+    <section class="code-section" id="exp6">
+      <h2>EXP 6 — A* Search</h2>
+      <div class="code-card">
+        <div class="code-toolbar">
+          <span class="filename">EXP6.py</span>
+          <button class="copy-btn" data-code="exp6-code">
+            <svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre class="code-block"><code id="exp6-code">def aStarAlgo(start_node, stop_node):
+	open_set = set(start_node)
+	closed_set = set()
+	g = {}
+	parents = {}
+	g[start_node] = 0
+	parents[start_node] = start_node
+	while len(open_set) > 0:
+		n = None
+		for v in open_set:
+			if n == None or g[v] + heuristic(v) < g[n] + heuristic(n):
+				n = v
+		if n == stop_node or Graph_nodes[n] == None:
+			pass
+		else:
+			for (m, weight) in get_neighbors(n):
+				if m not in open_set and m not in closed_set:
+					open_set.add(m)
+					parents[m] = n
+					g[m] = g[n] + weight
+				else:
+					if g[m] > g[n] + weight:
+						g[m] = g[n] + weight
+						parents[m] = n
+						if m in closed_set:
+							closed_set.remove(m)
+							open_set.add(m)
+
+		if n == None:
+			print('Path does not exist!')
+			return None
+		if n == stop_node:
+			path = []
+			while parents[n] != n:
+				path.append(n)
+				n = parents[n]
+			path.append(start_node)
+			path.reverse()
+			print('Path found: {}'.format(path))
+			return path
+		open_set.remove(n)
+		closed_set.add(n)
+	print('Path does not exist!')
+	return None
+
+def get_neighbors(v):
+	if v in Graph_nodes:
+		return Graph_nodes[v]
+	else:
+		return None
+
+def heuristic(n):
+	H_dist = {
+		'A': 11,
+		'B': 6,
+		'C': 99,
+		'D': 1,
+		'E': 7,
+		'F': 0,
+		'G': 0,
+	}
+	return H_dist[n]
+
+Graph_nodes = {
+	'A': [('B', 2), ('E', 3)],
+	'B': [('C', 1), ('F', 9)],
+	'C': None,
+	'E': [('D', 6)],
+	'D': [('G', 1)],
+}
+aStarAlgo('A', 'G')</code></pre>
+      </div>
+    </section>
+
+    <section class="code-section" id="exp7">
+      <h2>EXP 7 — Minimax</h2>
+      <div class="code-card">
+        <div class="code-toolbar">
+          <span class="filename">EXP7.py</span>
+          <button class="copy-btn" data-code="exp7-code">
+            <svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre class="code-block"><code id="exp7-code">import math
+def minimax(curDepth, nodeIndex,maxTurn, scores, targetDepth):
+	if (curDepth == targetDepth):
+		return scores[nodeIndex]
+	if (maxTurn):
+		return max(minimax(curDepth + 1, nodeIndex * 2, False, scores, targetDepth),
+		minimax(curDepth + 1, nodeIndex * 2 + 1,False, scores, targetDepth))
+	else:
+		return min(minimax(curDepth + 1, nodeIndex * 2,True, scores, targetDepth), minimax(curDepth + 1, nodeIndex * 2 + 1,True, scores, targetDepth))
+scores = [3, 5, 2, 9, 12, 5, 23, 23]
+treeDepth = math.log(len(scores), 2)
+print("The optimal value is : ", end="")
+print(minimax(0, 0, True, scores, treeDepth))</code></pre>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>AI Experiments &middot; Python</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
