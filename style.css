@@ -260,6 +260,95 @@ main {
 .tk-pp  { color: var(--syn-preproc);  font-weight: 500; }
 .tk-sec { color: var(--syn-section);  font-weight: 600; }
 
+/* ── Terminal / Command Block ── */
+.terminal-section {
+  margin-top: 18px;
+}
+.terminal-section h3 {
+  font-size: .88rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+}
+.terminal-section h3 .terminal-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: color-mix(in srgb, var(--green) 15%, transparent);
+  border-radius: 6px;
+  color: var(--green);
+  font-size: .85rem;
+}
+.terminal-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.terminal-card:hover { border-color: var(--green); }
+.terminal-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  transition: background .3s;
+}
+.terminal-toolbar .terminal-title {
+  font-family: var(--font-code);
+  font-size: .76rem;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.terminal-toolbar .terminal-dots {
+  display: flex;
+  gap: 5px;
+}
+.terminal-toolbar .terminal-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.terminal-toolbar .terminal-dots span:nth-child(1) { background: #ef4444; }
+.terminal-toolbar .terminal-dots span:nth-child(2) { background: #eab308; }
+.terminal-toolbar .terminal-dots span:nth-child(3) { background: #22c55e; }
+.terminal-body {
+  padding: 18px 20px;
+  background: #0d1117;
+  font-family: var(--font-code);
+  font-size: .8rem;
+  line-height: 1.8;
+  overflow-x: auto;
+}
+[data-theme="dark"] .terminal-body { background: #0a0e14; }
+.terminal-body code {
+  white-space: pre;
+  color: #c9d1d9;
+}
+.cmd-line { display: block; }
+.cmd-comment {
+  color: #6b7280;
+  font-style: italic;
+}
+.cmd-prompt {
+  color: #4ade80;
+  font-weight: 500;
+  user-select: none;
+}
+.cmd-text { color: #e2e8f0; }
+.cmd-flag { color: #818cf8; }
+.cmd-pipe { color: #facc15; }
+.cmd-string { color: #fb923c; }
+.cmd-blank { display: block; height: .6em; }
+
 /* ── Footer ── */
 footer {
   text-align: center;

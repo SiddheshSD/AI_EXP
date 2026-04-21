@@ -1,6 +1,7 @@
 %{
-/* Definition section */
 #include <stdio.h>
+#include <stdlib.h>
+
 int flag = 0;
 %}
 
@@ -8,12 +9,11 @@ int flag = 0;
 
 %left '+' '-'
 %left '*' '/' '%'
-%left '(' ')'
 
-/* Rule Section */
 %%
+
 ArithmeticExpression: E {
-    printf("\nResult=%d\n", $$);
+    printf("\nResult = %d\n", $1);
     return 0;
 };
 
@@ -25,24 +25,21 @@ E: E '+' E { $$ = $1 + $3; }
  | '(' E ')' { $$ = $2; }
  | NUMBER { $$ = $1; }
 ;
+
 %%
 
-// Driver code
-void main()
+int main()
 {
-    printf("\nEnter Any Arithmetic Expression which\n");
-    printf("can have operations Addition,\n");
-    printf("Subtraction, Multiplication, Division,\n");
-    printf("Modulus and Round brackets:\n");
-
+    printf("\nEnter Arithmetic Expression:\n");
     yyparse();
 
     if(flag == 0)
-        printf("\nEntered arithmetic expression is Valid\n\n");
+        printf("\nValid Expression\n");
 }
 
-void yyerror()
+int yyerror()
 {
-    printf("\nEntered arithmetic expression is Invalid\n\n");
+    printf("\nInvalid Expression\n");
     flag = 1;
+    return 0;
 }

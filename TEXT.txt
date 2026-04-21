@@ -1,0 +1,32 @@
+EXP4
+apt update
+apt install flex gcc -y
+
+flex p1.lex
+gcc lex.yy.c -o p1
+echo "hello 123 stop" | ./p1
+
+flex p2.lex
+gcc lex.yy.c -o p2
+echo "username stop" | ./p2
+
+flex p3.lex
+gcc lex.yy.c -o p3
+echo "10+20 a|b-stop" | ./p3
+
+
+EXP 5
+bison -d calc.y
+flex calc.l
+gcc lex.yy.c calc.tab.c -o calc -lfl
+./calc
+
+
+Other EXPs with Java code
+apt update
+apt install openjdk-17-jdk -y
+
+javac FileName.java
+java FileName
+
+

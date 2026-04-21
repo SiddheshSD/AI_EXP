@@ -1,25 +1,25 @@
 %{
 #include<stdio.h>
+#include<stdlib.h>
 %}
 
 %%
 
-stop exit(0);
+stop    { exit(0); }
 
-[a-zA-Z][a-zA-Z0-9]* printf("\nFound Identifier: %s",yytext);
+[a-zA-Z][a-zA-Z0-9]*   { printf("\nFound Identifier: %s", yytext); }
 
-[0-9]+ printf("\nFound Number: %s",yytext);
+[0-9]+   { printf("\nFound Number: %s", yytext); }
 
 %%
 
-main()
+int main()
 {
-yylex();
+    yylex();
+    return 0;
 }
 
 int yywrap()
 {
-	return 1;
+    return 1;
 }
-
-
