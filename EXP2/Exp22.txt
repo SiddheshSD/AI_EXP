@@ -1,0 +1,6 @@
+main ( )
+{
+int a ;
+float sspm ;
+position = initial + rate * 60 ; 
+}

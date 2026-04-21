@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════
-   AI Experiments — Clean & Simple
+   SPCC Experiments — Clean & Simple
    Dark (default) + Light theme toggle
    ═══════════════════════════════════════ */
 
@@ -21,6 +21,9 @@
   --syn-comment:  #9ca3af;
   --syn-function: #4f46e5;
   --syn-operator: #ca8a04;
+  --syn-type:     #0d9488;
+  --syn-preproc:  #be185d;
+  --syn-section:  #7c3aed;
 
   --radius:     10px;
   --font-code:  'JetBrains Mono', monospace;
@@ -43,6 +46,9 @@
   --syn-comment:  #6b7280;
   --syn-function: #818cf8;
   --syn-operator: #facc15;
+  --syn-type:     #2dd4bf;
+  --syn-preproc:  #f472b6;
+  --syn-section:  #a78bfa;
 }
 
 /* ── Reset ── */
@@ -133,7 +139,7 @@ nav::-webkit-scrollbar { display: none; }
 
 /* ── Main ── */
 main {
-  max-width: 820px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 76px 24px 80px;        /* top padding accounts for fixed header */
   display: flex;
@@ -148,12 +154,24 @@ main {
   margin-bottom: 10px;
 }
 
+/* ══════════════════════════════════
+   Code Grid — side by side layout
+   for experiments with multiple files
+   ══════════════════════════════════ */
+.code-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 16px;
+}
+
 /* ── Code Card ── */
 .code-card {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
   transition: border-color .2s;
+  display: flex;
+  flex-direction: column;
 }
 .code-card:hover { border-color: var(--accent); }
 
@@ -170,6 +188,21 @@ main {
   font-family: var(--font-code);
   font-size: .78rem;
   color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── Language Badge ── */
+.lang-badge {
+  font-family: var(--font-sans);
+  font-size: .68rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.3px;
 }
 
 /* ── Copy Button ── */
@@ -211,6 +244,7 @@ main {
   line-height: 1.7;
   tab-size: 4;
   transition: background .3s;
+  flex: 1;
 }
 .code-block code { white-space: pre; }
 
@@ -222,6 +256,9 @@ main {
 .tk-cmt { color: var(--syn-comment);  font-style: italic; }
 .tk-fn  { color: var(--syn-function); }
 .tk-op  { color: var(--syn-operator); }
+.tk-ty  { color: var(--syn-type);     }
+.tk-pp  { color: var(--syn-preproc);  font-weight: 500; }
+.tk-sec { color: var(--syn-section);  font-weight: 600; }
 
 /* ── Footer ── */
 footer {
@@ -239,4 +276,5 @@ footer {
   .nav-link { padding: 5px 10px; font-size: .72rem; }
   main { padding: 68px 14px 60px; gap: 28px; }
   .code-block { font-size: .72rem; padding: 14px; }
+  .code-grid { grid-template-columns: 1fr; }
 }
